@@ -1,53 +1,55 @@
-Human Capital Management System (HCM) :briefcase:
-The Human Capital Management System (HCM) is a comprehensive solution designed to streamline and enhance human resource operations within organizations. Built using .NET 9 and React 19, it leverages MobX for efficient state management and implements the CQRS (Command Query Responsibility Segregation) pattern alongside the Mediator design pattern to ensure a scalable and maintainable architecture.​
+🧑‍💼 Human Capital Management System (HCM)
+A comprehensive solution designed to streamline and enhance human resource operations within organizations. Built using .NET 9, React 19, MobX, and implementing the CQRS (Command Query Responsibility Segregation) pattern alongside the Mediator design pattern, HCM ensures a scalable and maintainable architecture.​
 
-Table of Contents :clipboard:
-Overview
+🏗️ Architecture Overview
+The HCM system is structured to promote scalability, maintainability, and performance:​
 
-Features
+Frontend: Utilizes React 19 for building dynamic and responsive user interfaces.​
 
-Architecture
+State Management: Employs MobX to manage application state efficiently.​
+GitHub
++1
+GitHub
++1
 
-Technologies Used
+Backend: Built with .NET 9, implementing the CQRS pattern using the Mediator design pattern to handle commands and queries, facilitating clear separation between read and write operations.​
 
-Getting Started
+Data Access: Implements Entity Framework Core for object-relational mapping, facilitating efficient database interactions.​
 
-Prerequisites
+Authentication & Authorization: Integrates secure authentication mechanisms with role-based access control to ensure data security and appropriate access levels.​
 
-Installation
+🛠️ Technologies Used
+Frontend:
 
-Usage
+React 19​
 
-Contributing
+MobX​
+Stack Overflow
++8
+DEV Community
++8
+Microsoft
++8
 
-License
+TypeScript​
+GitHub
 
-Overview :mag:
-HCM is tailored to meet the diverse needs of modern HR departments, offering functionalities such as employee management, recruitment tracking, performance evaluations, and more. By integrating the latest technologies and architectural patterns, HCM provides a responsive and user-friendly experience for HR professionals and employees alike.​
+React Router​
+forcoder.net
++2
+GitHub
++2
+GitHub
++2
 
-Features :sparkles:
-Employee Management: Maintain detailed records of employee information, including personal details, job roles, and contact information.​
+Semantic UI React​
+GitHub
++3
+GitHub
++3
+GitHub
++3
 
-Recruitment Tracking: Manage job postings, track applicant progress, and streamline the hiring process.​
-
-Performance Evaluations: Conduct and document employee performance reviews with customizable evaluation criteria.​
-
-Leave Management: Handle leave requests, approvals, and maintain accurate leave balances.​
-
-Role-Based Access Control: Ensure data security by assigning appropriate access levels to different user roles.​
-
-Architecture :triangular_ruler:
-The HCM system is structured following the principles of Clean Architecture, promoting separation of concerns and enhancing testability:​
-
-Domain Layer: Encapsulates the core business logic and entities.​
-
-Application Layer: Implements the CQRS pattern using the Mediator design pattern to handle commands and queries, facilitating clear separation between read and write operations.​
-
-Infrastructure Layer: Manages data access, external services, and other infrastructure-related concerns.​
-
-Presentation Layer: Consists of the React 19 frontend, utilizing MobX for state management to create a dynamic and responsive user interface.​
-
-Technologies Used :hammer_and_wrench:
 Backend:
 
 .NET 9​
@@ -57,50 +59,36 @@ ASP.NET Core​
 Entity Framework Core​
 
 MediatR​
+Stack Overflow
 
-Frontend:
-
-React 19​
-
-MobX​
-Markdown Guide
-
-TypeScript​
+FluentValidation​
+forcoder.net
++2
 GitHub
-+1
-GeeksforGeeks
-+1
++2
+GitHub
++2
 
 Database:
 
 SQL Server​
 
-Others:
+Other Tools:
 
 Docker (for containerization)​
 
 Swagger (for API documentation)​
 
-xUnit (for testing)​
-Gist
-+1
-GitHub Docs
-+1
+Serilog (for logging)​
 
-Getting Started :rocket:
-Prerequisites :checkered_flag:
-Before setting up the HCM system, ensure you have the following installed:
+🚀 Getting Started
+To set up the HCM system locally, follow these steps:
 
+Prerequisites
 .NET 9 SDK​
 
 Node.js (for frontend development)​
 
 SQL Server​
-GitHub Docs
-+7
-GitHub Docs
-+7
-jimit105.github.io
-+7
 
 Docker (optional, for containerization)
