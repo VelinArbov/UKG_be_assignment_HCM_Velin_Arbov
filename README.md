@@ -1,4 +1,5 @@
-🧑‍💼 Human Capital Management System (HCM)
+
+#🧑‍💼 Human Capital Management System (HCM)
 A comprehensive Human Capital Management System designed to streamline HR processes for small to medium-sized businesses. This application utilizes .NET 9, React 19, MobX for state management, and implements the CQRS (Command Query Responsibility Segregation) pattern with the Mediator design pattern to ensure a scalable and maintainable architecture.​
 
 🏗️ Architecture Overview
