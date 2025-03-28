@@ -1,4 +1,6 @@
+using HCM.Api.Endpoint;
 using HCM.Persistence;
+using HCM.Persistence.Seed;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,17 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 var app = builder.Build();
 
+// Seed the database
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<AppDbContext>();
+    DbInitializer.Initialize(context);
+}
+
+app.UseAuthorization();
+
 app.MapControllers();
+app.MapPositionEndpoints();
 
 app.Run();
