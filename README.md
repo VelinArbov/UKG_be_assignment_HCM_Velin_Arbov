@@ -29,31 +29,12 @@ Frontend:
 React 19​
 
 MobX​
-Stack Overflow
-+8
-DEV Community
-+8
-Microsoft
-+8
 
 TypeScript​
-GitHub
 
 React Router​
-forcoder.net
-+2
-GitHub
-+2
-GitHub
-+2
 
 Semantic UI React​
-GitHub
-+3
-GitHub
-+3
-GitHub
-+3
 
 Backend:
 
@@ -64,15 +45,9 @@ ASP.NET Core​
 Entity Framework Core​
 
 MediatR​
-Stack Overflow
 
 FluentValidation​
-forcoder.net
-+2
-GitHub
-+2
-GitHub
-+2
+
 
 Database:
 
