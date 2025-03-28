@@ -1,102 +1,106 @@
+Human Capital Management System (HCM) :briefcase:
+The Human Capital Management System (HCM) is a comprehensive solution designed to streamline and enhance human resource operations within organizations. Built using .NET 9 and React 19, it leverages MobX for efficient state management and implements the CQRS (Command Query Responsibility Segregation) pattern alongside the Mediator design pattern to ensure a scalable and maintainable architecture.​
 
-#🧑‍💼 Human Capital Management System (HCM)
-A comprehensive Human Capital Management System designed to streamline HR processes for small to medium-sized businesses. This application utilizes .NET 9, React 19, MobX for state management, and implements the CQRS (Command Query Responsibility Segregation) pattern with the Mediator design pattern to ensure a scalable and maintainable architecture.​
+Table of Contents :clipboard:
+Overview
 
-🏗️ Architecture Overview
-The HCM system is structured to promote separation of concerns and scalability:​
+Features
 
-Frontend: Developed with React 19, utilizing MobX for efficient state management, ensuring responsive and dynamic user interfaces.​
+Architecture
 
-Backend: Built with .NET 9, employing Minimal APIs for lightweight and performant endpoints. The backend follows the CQRS pattern, separating command and query responsibilities to optimize performance and maintainability. The Mediator pattern is used to decouple request handling, promoting a clean and testable codebase.​
+Technologies Used
 
-Data Access: Utilizes Entity Framework Core for object-relational mapping, facilitating seamless database interactions.​
-Microsoft Learn
+Getting Started
 
-🔑 Key Features
-Employee Management: Comprehensive CRUD operations for employee records, including personal details, job roles, and contact information.​
+Prerequisites
 
-Authentication and Authorization: Secure user authentication with role-based access control to protect sensitive information and functionalities.​
+Installation
 
-Department Management: Organize and manage departments within the organization, assigning employees accordingly.​
+Usage
 
-Leave Management: Track and manage employee leave requests, approvals, and balances.​
-Stack Overflow
-+3
-GitHub
-+3
-GitHub
-+3
+Contributing
 
-Performance Reviews: Conduct and document employee performance evaluations to support growth and development.​
+License
 
-🛠️ Technologies Used
-Frontend:
+Overview :mag:
+HCM is tailored to meet the diverse needs of modern HR departments, offering functionalities such as employee management, recruitment tracking, performance evaluations, and more. By integrating the latest technologies and architectural patterns, HCM provides a responsive and user-friendly experience for HR professionals and employees alike.​
 
-React 19​
-Stack Overflow
+Features :sparkles:
+Employee Management: Maintain detailed records of employee information, including personal details, job roles, and contact information.​
 
-MobX​
+Recruitment Tracking: Manage job postings, track applicant progress, and streamline the hiring process.​
 
-TypeScript​
+Performance Evaluations: Conduct and document employee performance reviews with customizable evaluation criteria.​
 
+Leave Management: Handle leave requests, approvals, and maintain accurate leave balances.​
+
+Role-Based Access Control: Ensure data security by assigning appropriate access levels to different user roles.​
+
+Architecture :triangular_ruler:
+The HCM system is structured following the principles of Clean Architecture, promoting separation of concerns and enhancing testability:​
+
+Domain Layer: Encapsulates the core business logic and entities.​
+
+Application Layer: Implements the CQRS pattern using the Mediator design pattern to handle commands and queries, facilitating clear separation between read and write operations.​
+
+Infrastructure Layer: Manages data access, external services, and other infrastructure-related concerns.​
+
+Presentation Layer: Consists of the React 19 frontend, utilizing MobX for state management to create a dynamic and responsive user interface.​
+
+Technologies Used :hammer_and_wrench:
 Backend:
 
 .NET 9​
 
-Minimal APIs​
-Wikipedia
-+6
-PureSourceCode
-+6
-Microsoft Learn
-+6
+ASP.NET Core​
 
 Entity Framework Core​
 
-MediatR (for implementing the Mediator pattern)​
+MediatR​
+
+Frontend:
+
+React 19​
+
+MobX​
+Markdown Guide
+
+TypeScript​
+GitHub
++1
+GeeksforGeeks
++1
 
 Database:
 
 SQL Server​
-Microsoft Learn
-+4
-Microsoft Learn
-+4
-Microsoft for Developers
-+4
 
-Other Tools:
+Others:
 
 Docker (for containerization)​
 
 Swagger (for API documentation)​
-GitHub
+
+xUnit (for testing)​
+Gist
 +1
-GitHub
+GitHub Docs
 +1
 
-🚀 Getting Started
-To set up the HCM system locally, follow these steps:​
+Getting Started :rocket:
+Prerequisites :checkered_flag:
+Before setting up the HCM system, ensure you have the following installed:
 
-Prerequisites
 .NET 9 SDK​
 
 Node.js (for frontend development)​
 
 SQL Server​
-GitHub
-+5
-Microsoft Learn
-+5
-Stack Overflow
-+5
+GitHub Docs
++7
+GitHub Docs
++7
+jimit105.github.io
++7
 
-Docker (optional, for containerization)​
-
-Installation
-Clone the Repository:
-
-bash
-Copy
-Edit
-git clone https://github.com/yourusername/hcm-system.git
+Docker (optional, for containerization)
