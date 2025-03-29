@@ -35,6 +35,22 @@ function App() {
     setEditMode(false);
   }
 
+  const handleSubmitForm = (position: Position) => {
+    if (position.id) {
+      setPositions(positions.map(x => x.id == position.id ? position : x))
+    } else {
+      const newPosition = { ...position, id: positions.length.toString() }
+      setPositions([...positions, newPosition]);
+    }
+
+    setEditMode(false);
+  }
+
+  const handleDelete = (id: string) => {
+    setPositions(positions.filter(x => x.id !== id))
+  }
+
+
 
   return (
     <>
@@ -48,7 +64,9 @@ function App() {
             selectedPosition={selectedPosition}
             editMode={editMode}
             openForm={handleOpenForm}
-            closeForm={handleFormClose} />
+            closeForm={handleFormClose}
+            submitForm={handleSubmitForm}
+            deletePosition={handleDelete} />
         </Container>
       </Box>
     </>
