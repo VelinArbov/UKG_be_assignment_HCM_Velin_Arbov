@@ -1,4 +1,6 @@
 using HCM.Api.Endpoint;
+using HCM.Application.Core;
+using HCM.Application.Positions.Queries;
 using HCM.Persistence;
 using HCM.Persistence.Seed;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +16,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 });
 
 builder.Services.AddCors();
+builder.Services.AddMediatR(x =>
+    x.RegisterServicesFromAssemblyContaining<GetPositionList.Handler>());
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 var app = builder.Build();
 

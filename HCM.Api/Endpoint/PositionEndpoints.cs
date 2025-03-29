@@ -1,6 +1,9 @@
 ﻿using HCM.Domain;
 using HCM.Persistence;
-using Microsoft.EntityFrameworkCore;
+using HCM.Application;
+using HCM.Application.Positions.Commands;
+using HCM.Application.Positions.Queries;
+using MediatR;
 
 namespace HCM.Api.Endpoint
 {
@@ -15,48 +18,33 @@ namespace HCM.Api.Endpoint
             app.MapDelete("/api/positions/{id}", DeletePosition);
         }
 
-        private static async Task<IResult> GetAllPositions(AppDbContext db)
+        private static async Task<IResult> GetAllPositions(IMediator mediator)
         {
-            var positions = await db.Positions.ToListAsync();
+            var positions = await mediator.Send(new GetPositionList.Query());
             return Results.Ok(positions);
         }
 
-        private static async Task<IResult> GetPositionById(Guid id, AppDbContext db)
+        private static async Task<IResult> GetPositionById(Guid id, IMediator mediator)
         {
-            var position = await db.Positions.FindAsync(id);
-            return position is not null ? Results.Ok(position) : Results.NotFound();
+            var position = await mediator.Send(new GetPositionDetails.Query { Id = id });
+            return Results.Ok(position);
         }
 
-        private static async Task<IResult> CreatePosition(Position position, AppDbContext db)
+        private static async Task<IResult> CreatePosition(Position position, IMediator mediator)
         {
-            db.Positions.Add(position);
-            await db.SaveChangesAsync();
-            return Results.Created($"/positions/{position.Id}", position);
+            var result = await mediator.Send(new CreatePosition.Command{Position = position});
+            return Results.Created($"/positions/{result}", position);
         }
 
-        private static async Task<IResult> UpdatePosition(Guid id, Position updatedPosition, AppDbContext db)
+        private static async Task<IResult> UpdatePosition(Guid id, Position updatedPosition, IMediator mediator)
         {
-            var position = await db.Positions.FindAsync(id);
-            if (position is null) return Results.NotFound();
-
-            position.Title = updatedPosition.Title;
-            position.Date = updatedPosition.Date;
-            position.Description = updatedPosition.Description;
-            position.Category = updatedPosition.Category;
-            position.IsCancelled = updatedPosition.IsCancelled;
-            position.City = updatedPosition.City;
-
-            await db.SaveChangesAsync();
+           await mediator.Send(new UpdatePosition.Command { Id = id, Position = updatedPosition });
             return Results.NoContent();
         }
 
-        private static async Task<IResult> DeletePosition(Guid id, AppDbContext db)
+        private static async Task<IResult> DeletePosition(Guid id, IMediator mediator)
         {
-            var position = await db.Positions.FindAsync(id);
-            if (position is null) return Results.NotFound();
-
-            db.Positions.Remove(position);
-            await db.SaveChangesAsync();
+            await mediator.Send(new DeletePosition.Command { Id = id });
             return Results.NoContent();
         }
     }
