@@ -1,0 +1,12 @@
+{
+    "folder-color.pathColors": [
+        {
+            "folderPath": "HCM.Client\\src\\assets\\",
+            "color": "foldercolorizer.color_660066"
+        },
+        {
+            "folderPath": "HCM.Client\\src\\lib\\types\\",
+            "color": "foldercolorizer.color_660066"
+        }
+    ]
+}
