@@ -26,7 +26,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseCors(x =>
-    x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:3001", "http://localhost:3000")
+    x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:3001", "https://localhost:3000")
 );
 
 app.UseAuthorization();
