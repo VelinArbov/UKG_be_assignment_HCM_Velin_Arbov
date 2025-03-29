@@ -8,11 +8,11 @@ namespace HCM.Api.Endpoint
     {
         public static void MapPositionEndpoints(this WebApplication app)
         {
-            app.MapGet("/positions", GetAllPositions);
-            app.MapGet("/positions/{id}", GetPositionById);
-            app.MapPost("/positions", CreatePosition);
-            app.MapPut("/positions/{id}", UpdatePosition);
-            app.MapDelete("/positions/{id}", DeletePosition);
+            app.MapGet("/api/positions", GetAllPositions);
+            app.MapGet("/api/positions/{id}", GetPositionById);
+            app.MapPost("/api/positions", CreatePosition);
+            app.MapPut("/api/positions/{id}", UpdatePosition);
+            app.MapDelete("/api/positions/{id}", DeletePosition);
         }
 
         private static async Task<IResult> GetAllPositions(AppDbContext db)

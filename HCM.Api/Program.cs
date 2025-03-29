@@ -13,6 +13,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
 // Seed the database
@@ -22,6 +24,10 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<AppDbContext>();
     DbInitializer.Initialize(context);
 }
+
+app.UseCors(x =>
+    x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:3001", "http://localhost:3000")
+);
 
 app.UseAuthorization();
 
