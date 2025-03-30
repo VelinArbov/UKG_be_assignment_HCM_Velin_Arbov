@@ -1,15 +1,15 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { FormEvent } from "react";
+import { usePositions } from "../../../lib/hooks/usePositions";
 
 type Props = {
     closeForm: () => void;
     position?: Position;
-    submitForm: (postion: Position) => void;
 }
 
-export default function PositionForm({ closeForm, position, submitForm }: Props) {
-
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+export default function PositionForm({ closeForm, position }: Props) {
+    const { updatePosition } = usePositions();
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const formData = new FormData(event.currentTarget);
@@ -20,9 +20,12 @@ export default function PositionForm({ closeForm, position, submitForm }: Props)
         });
 
         // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-        if (position) data.id === position.id
+        if (position) {
+            data.id = position.id;
+            await updatePosition.mutateAsync(data as unknown as Position)
+            closeForm();
+        }
 
-        submitForm(data as unknown as Position)
     }
 
     return (
@@ -35,7 +38,12 @@ export default function PositionForm({ closeForm, position, submitForm }: Props)
                 <TextField label='City' defaultValue={position?.city} />
                 <Box display='flex' justifyContent='end' gap={3}>
                     <Button onClick={closeForm} color="inherit">Cancel</Button>
-                    <Button type="submit" color="success" variant="contained">Submit</Button>
+                    <Button
+                        type="submit"
+                        color="success"
+                        variant="contained"
+                        disabled={updatePosition.isPending}
+                    >Submit</Button>
                 </Box>
             </Box>
         </Paper>

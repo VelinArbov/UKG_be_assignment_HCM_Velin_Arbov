@@ -11,12 +11,11 @@ type Props = {
     openForm: (id: string) => void;
     closeForm: () => void;
     editMode: boolean;
-    submitForm: (postion: Position) => void;
     deletePosition: (id: string) => void;
 
 }
 
-export default function PositionsDashboard({ positions, cancelPosition, selectPosition, selectedPosition, openForm, closeForm, editMode, submitForm, deletePosition }: Props) {
+export default function PositionsDashboard({ positions, cancelPosition, selectPosition, selectedPosition, openForm, closeForm, editMode, deletePosition }: Props) {
     return (
         <Grid container spacing={3}>
             <Grid size={7}>
@@ -28,7 +27,7 @@ export default function PositionsDashboard({ positions, cancelPosition, selectPo
                     cancelPosition={cancelPosition}
                     openForm={openForm} />}
                 {editMode &&
-                    <PositionForm closeForm={closeForm} position={selectedPosition} submitForm={submitForm} />}
+                    <PositionForm closeForm={closeForm} position={selectedPosition} />}
             </Grid>
         </Grid>
     )
