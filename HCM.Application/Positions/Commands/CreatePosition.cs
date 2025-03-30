@@ -1,4 +1,6 @@
-﻿using HCM.Domain;
+﻿using AutoMapper;
+using HCM.Application.Positions.DTOs;
+using HCM.Domain;
 using HCM.Persistence;
 using MediatR;
 
@@ -8,18 +10,20 @@ public class CreatePosition
 {
     public class Command : IRequest<Guid>
     {
-        public required Position Position { get; set; }
+        public required CreatePositionDto Position { get; set; }
     }
 
-    public class Handler (AppDbContext context): IRequestHandler<Command, Guid>
+    public class Handler (AppDbContext context, IMapper mapper): IRequestHandler<Command, Guid>
     {
         public async Task<Guid> Handle(Command request, CancellationToken cancellationToken)
         {
-            context.Positions.Add(request.Position);
+            var position = mapper.Map<Position>(request.Position);
+
+            context.Positions.Add(position);
 
             await context.SaveChangesAsync(cancellationToken);
 
-            return request.Position.Id;
+            return position.Id;
         }
     }
 }

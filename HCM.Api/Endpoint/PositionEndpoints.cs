@@ -1,7 +1,6 @@
 ﻿using HCM.Domain;
-using HCM.Persistence;
-using HCM.Application;
 using HCM.Application.Positions.Commands;
+using HCM.Application.Positions.DTOs;
 using HCM.Application.Positions.Queries;
 using MediatR;
 
@@ -30,7 +29,7 @@ namespace HCM.Api.Endpoint
             return Results.Ok(position);
         }
 
-        private static async Task<IResult> CreatePosition(Position position, IMediator mediator)
+        private static async Task<IResult> CreatePosition(CreatePositionDto position, IMediator mediator)
         {
             var result = await mediator.Send(new CreatePosition.Command{Position = position});
             return Results.Created($"/positions/{result}", position);
