@@ -36,9 +36,9 @@ namespace HCM.Api.Endpoint
             return result.ToApiResult();
         }
 
-        private static async Task<IResult> UpdatePosition(Guid id, Position updatedPosition, IMediator mediator)
+        private static async Task<IResult> UpdatePosition(Guid id, UpdatePositionDto updatedPosition, IMediator mediator)
         {
-            var result = await mediator.Send(new UpdatePosition.Command { Id = id, Position = updatedPosition });
+            var result = await mediator.Send(new UpdatePosition.Command { Id = id, PositionDto = updatedPosition });
             return result.ToApiResult();
         }
 

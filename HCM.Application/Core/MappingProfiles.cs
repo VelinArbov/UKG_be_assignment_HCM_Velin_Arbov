@@ -10,5 +10,6 @@ public class MappingProfiles : Profile
     {
         CreateMap<Position, Position>();
         CreateMap<CreatePositionDto, Position>();
+        CreateMap<UpdatePositionDto, Position>();
     }
 }
