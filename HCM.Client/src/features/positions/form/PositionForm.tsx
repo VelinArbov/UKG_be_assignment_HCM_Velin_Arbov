@@ -19,7 +19,6 @@ export default function PositionForm({ closeForm, position }: Props) {
             data[key] = value;
         });
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         if (position) {
             data.id = position.id;
             await updatePosition.mutateAsync(data as unknown as Position)

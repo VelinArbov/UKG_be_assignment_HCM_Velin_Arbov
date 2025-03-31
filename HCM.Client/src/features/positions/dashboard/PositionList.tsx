@@ -7,6 +7,7 @@ type Props = {
     deletePosition: (id: string) => void;
 }
 export default function PositionList({ positions, selectPosition, deletePosition }: Props) {
+    console.log(positions)
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             {positions.map(position => (
