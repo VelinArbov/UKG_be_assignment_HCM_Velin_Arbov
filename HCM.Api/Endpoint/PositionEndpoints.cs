@@ -33,19 +33,19 @@ namespace HCM.Api.Endpoint
         private static async Task<IResult> CreatePosition(CreatePositionDto position, IMediator mediator)
         {
             var result = await mediator.Send(new CreatePosition.Command { PositionDto = position });
-            return Results.Created($"/positions/{result}", position);
+            return result.ToApiResult();
         }
 
         private static async Task<IResult> UpdatePosition(Guid id, Position updatedPosition, IMediator mediator)
         {
-            await mediator.Send(new UpdatePosition.Command { Id = id, Position = updatedPosition });
-            return Results.NoContent();
+            var result = await mediator.Send(new UpdatePosition.Command { Id = id, Position = updatedPosition });
+            return result.ToApiResult();
         }
 
         private static async Task<IResult> DeletePosition(Guid id, IMediator mediator)
         {
-            await mediator.Send(new DeletePosition.Command { Id = id });
-            return Results.NoContent();
+            var result = await mediator.Send(new DeletePosition.Command { Id = id });
+            return result.ToApiResult();
         }
     }
 }

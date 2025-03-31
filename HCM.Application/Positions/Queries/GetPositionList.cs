@@ -1,20 +1,22 @@
-﻿using HCM.Domain;
+﻿using HCM.Application.Core;
+using HCM.Domain;
 using HCM.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace HCM.Application.Positions.Queries
-{
-    public class GetPositionList
-    {
-        public class Query : IRequest<List<Position>>{}
+namespace HCM.Application.Positions.Queries;
 
-        public class Handler(AppDbContext context) : IRequestHandler<Query, List<Position>>
+public class GetPositionList
+{
+    public class Query : IRequest<Result<List<Position>>>{}
+
+    public class Handler(AppDbContext context) : IRequestHandler<Query, Result<List<Position>>>
+    {
+        public async Task<Result<List<Position>>> Handle(Query request, CancellationToken cancellationToken)
         {
-            public async Task<List<Position>> Handle(Query request, CancellationToken cancellationToken)
-            {
-                return await context.Positions.ToListAsync(cancellationToken: cancellationToken);
-            }
+            var result = await context.Positions.ToListAsync(cancellationToken: cancellationToken);
+
+            return Result<List<Position>>.Success(result);
         }
     }
 }
