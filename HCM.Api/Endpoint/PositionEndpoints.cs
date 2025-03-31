@@ -3,10 +3,11 @@ using HCM.Application.Positions.Commands;
 using HCM.Application.Positions.DTOs;
 using HCM.Application.Positions.Queries;
 using MediatR;
+using HCM.Api.Common.Extensions;
 
 namespace HCM.Api.Endpoint
 {
-    public static class PositionEndpoints
+    public static class PositionEndpoints 
     {
         public static void MapPositionEndpoints(this WebApplication app)
         {
@@ -25,19 +26,19 @@ namespace HCM.Api.Endpoint
 
         private static async Task<IResult> GetPositionById(Guid id, IMediator mediator)
         {
-            var position = await mediator.Send(new GetPositionDetails.Query { Id = id });
-            return Results.Ok(position);
+            var result = await mediator.Send(new GetPositionDetails.Query { Id = id });
+            return result.ToApiResult();
         }
 
         private static async Task<IResult> CreatePosition(CreatePositionDto position, IMediator mediator)
         {
-            var result = await mediator.Send(new CreatePosition.Command{Position = position});
+            var result = await mediator.Send(new CreatePosition.Command { PositionDto = position });
             return Results.Created($"/positions/{result}", position);
         }
 
         private static async Task<IResult> UpdatePosition(Guid id, Position updatedPosition, IMediator mediator)
         {
-           await mediator.Send(new UpdatePosition.Command { Id = id, Position = updatedPosition });
+            await mediator.Send(new UpdatePosition.Command { Id = id, Position = updatedPosition });
             return Results.NoContent();
         }
 

@@ -1,27 +1,26 @@
-﻿using HCM.Domain;
+﻿using HCM.Application.Core;
+using HCM.Domain;
 using HCM.Persistence;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
-namespace HCM.Application.Positions.Queries
+namespace HCM.Application.Positions.Queries;
+
+public class GetPositionDetails
 {
-    public class GetPositionDetails
+    public class Query : IRequest<Result<Position>>
     {
-        public class Query : IRequest<Position>
+        public required Guid Id { get; set; }
+    }
+
+    public class Handler(AppDbContext context) : IRequestHandler<Query, Result<Position>>
+    {
+        public async Task<Result<Position>> Handle(Query request, CancellationToken cancellationToken)
         {
-            public required Guid Id { get; set; }
-        }
+            var position = await context.Positions.FindAsync([request.Id], cancellationToken);
 
-        public class Handler(AppDbContext context) : IRequestHandler<Query, Position>
-        {
-            public async Task<Position> Handle(Query request, CancellationToken cancellationToken)
-            {
-                var position = await context.Positions.FindAsync([request.Id], cancellationToken);
-
-                if (position == null) throw new Exception("Activity not found");
-
-                return position;
-            }
+            return position == null 
+                ? Result<Position>.Failure("Activity not found",404) 
+                : Result<Position>.Success(position);
         }
     }
 }

@@ -10,14 +10,14 @@ public class CreatePosition
 {
     public class Command : IRequest<Guid>
     {
-        public required CreatePositionDto Position { get; set; }
+        public required CreatePositionDto PositionDto { get; set; }
     }
 
     public class Handler (AppDbContext context, IMapper mapper): IRequestHandler<Command, Guid>
     {
         public async Task<Guid> Handle(Command request, CancellationToken cancellationToken)
         {
-            var position = mapper.Map<Position>(request.Position);
+            var position = mapper.Map<Position>(request.PositionDto);
 
             context.Positions.Add(position);
 

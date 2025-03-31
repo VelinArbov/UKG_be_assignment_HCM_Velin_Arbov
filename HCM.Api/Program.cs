@@ -1,6 +1,9 @@
+using FluentValidation;
 using HCM.Api.Endpoint;
+using HCM.Api.Middleware;
 using HCM.Application.Core;
 using HCM.Application.Positions.Queries;
+using HCM.Application.Positions.Validators;
 using HCM.Persistence;
 using HCM.Persistence.Seed;
 using Microsoft.EntityFrameworkCore;
@@ -17,8 +20,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddCors();
 builder.Services.AddMediatR(x =>
-    x.RegisterServicesFromAssemblyContaining<GetPositionList.Handler>());
+{
+    x.RegisterServicesFromAssemblyContaining<GetPositionList.Handler>();
+    x.AddOpenBehavior(typeof(ValidationBehavior<,>));
+});
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+builder.Services.AddValidatorsFromAssemblyContaining<CreatePositionValidator>();
+builder.Services.AddTransient<ExceptionMiddleware>();
 
 var app = builder.Build();
 
@@ -29,6 +37,8 @@ using (var scope = app.Services.CreateScope())
     var context = services.GetRequiredService<AppDbContext>();
     DbInitializer.Initialize(context);
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors(x =>
     x.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:3001", "https://localhost:3000")
