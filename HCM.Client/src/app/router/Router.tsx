@@ -3,6 +3,7 @@ import App from "../layout/App";
 import HomePage from "../home/HomePage";
 import PositionsDashboard from "../../features/positions/dashboard/PositionsDashboard";
 import PositionForm from "../../features/positions/form/PositionForm";
+import PositionDetail from "../../features/positions/details/PositionDetail";
 
 export const router = createBrowserRouter([
     {
@@ -11,7 +12,9 @@ export const router = createBrowserRouter([
         children: [
             { path: '', element: <HomePage /> },
             { path: 'positions', element: <PositionsDashboard /> },
-            { path: 'createPosition', element: <PositionForm /> }
+            { path: 'positions/:id', element: <PositionDetail /> },
+            { path: 'createPosition', element: <PositionForm key='create' /> },
+            { path: 'edit/:id', element: <PositionForm /> },
         ]
     }
 ])

@@ -2,13 +2,13 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import agent from "../api/agent";
 import { Position, Result } from "../types";
 
-export const usePositions = () => {
+export const usePositions = (id?: string) => {
   const queryClient = useQueryClient();
 
   const { data: positions, isPending } = useQuery({
     queryKey: ["positions"],
     queryFn: async () => {
-      const response = await agent.get<Result<Position[]>>("positions");
+      const response = await agent.get<Result<Position[]>>("/positions");
 
       if (!response.data.isSuccess) {
         throw new Error(response.data.error ?? "Failed to load positions");
@@ -18,8 +18,19 @@ export const usePositions = () => {
     },
   });
 
+  const { data: position, isLoading: isLoadingPosition } = useQuery({
+    queryKey: ["positions", id],
+    queryFn: async () => {
+      const response = await agent.get<Position>(`/positions/${id}`);
+
+      return response.data;
+    },
+    enabled: !!id,
+  });
+
   const updatePosition = useMutation({
     mutationFn: async (position: Position) => {
+      console.log(position)
       const response = await agent.put<Result<void>>(
         `/positions/${position.id}`,
         position
@@ -38,10 +49,7 @@ export const usePositions = () => {
 
   const createPosition = useMutation({
     mutationFn: async (position: Position) => {
-      const response = await agent.post<Result<string>>(
-        "/positions",
-        position
-      );
+      const response = await agent.post<Result<string>>("/positions", position);
 
       if (!response.data.isSuccess) {
         throw new Error(response.data.error ?? "Failed to create position");
@@ -75,5 +83,7 @@ export const usePositions = () => {
     updatePosition,
     createPosition,
     deletePosition,
+    position,
+    isLoadingPosition,
   };
 };

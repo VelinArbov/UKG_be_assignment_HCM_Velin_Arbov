@@ -1,6 +1,7 @@
 import { Box, Button, Card, CardActions, CardContent, Chip, Typography } from "@mui/material"
 import { usePositions } from "../../../lib/hooks/usePositions";
 import { Position } from "../../../lib/types";
+import { Link } from "react-router";
 
 type Props = {
     position: Position;
@@ -20,7 +21,7 @@ export default function PositionCard({ position }: Props) {
             <CardActions sx={{ display: 'flex', justifyContent: 'space-between', pb: 2 }}>
                 <Chip label={position.category} variant="outlined" />
                 <Box display='flex' gap={3}>
-                    <Button onClick={() => { }} size="medium" variant="contained">View</Button>
+                    <Button component={Link} to={`/positions/${position.id}`} size="medium" variant="contained">View</Button>
                     <Button onClick={() => deletePosition.mutate(position.id)} 
                     disabled={deletePosition.isPending} 
                     size="medium" 

@@ -1,30 +1,29 @@
 import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
+import { Link, useNavigate, useParams } from "react-router";
 import { usePositions } from "../../../lib/hooks/usePositions";
-import { Position } from "../../../lib/types";
 
-type Props = {
-    selectedPosition: Position;
-    cancelPosition: () => void;
-    openForm: (id: string) => void;
-}
+export default function PositionDetail() {
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const { position, isLoadingPosition } = usePositions(id);
 
-export default function PositionDetail({ selectedPosition, cancelPosition, openForm }: Props) {
-    const { positions } = usePositions();
-    const position = positions?.find(x => x.id === selectedPosition.id);
-    if (position)
+    console.log(position)
+    if (isLoadingPosition) return <Typography>Loading...</Typography>
 
-        return (
-            <Card sx={{ borderRadius: 3 }}>
-                <CardMedia component='img' src={`/images/categoryImages/${selectedPosition.category}.jpg`} />
-                <CardContent>
-                    <Typography variant="h5">{selectedPosition.title}</Typography>
-                    <Typography variant="subtitle1" fontWeight='light'>{selectedPosition.date}</Typography>
-                    <Typography variant="body1">{selectedPosition.description}</Typography>
-                </CardContent>
-                <CardActions>
-                    <Button onClick={() => openForm(selectedPosition.id)} color="primary">Edit</Button>
-                    <Button onClick={cancelPosition} color="inherit">Cancel</Button>
-                </CardActions>
-            </Card>
-        )
+    if (!position) return <Typography>Position not found</Typography>
+
+    return (
+        <Card sx={{ borderRadius: 3 }}>
+            <CardMedia component='img' src={`/images/categoryImages/${position.category}.jpg`} />
+            <CardContent>
+                <Typography variant="h5">{position.title}</Typography>
+                <Typography variant="subtitle1" fontWeight='light'>{position.date}</Typography>
+                <Typography variant="body1">{position.description}</Typography>
+            </CardContent>
+            <CardActions>
+                <Button component={Link} to={`/edit/${position.id}`} color="primary">Edit</Button>
+                <Button onClick={() => navigate('/positions')} color="inherit">Cancel</Button>
+            </CardActions>
+        </Card>
+    )
 }

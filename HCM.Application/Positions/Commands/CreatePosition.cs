@@ -18,13 +18,14 @@ public class CreatePosition
     {
         public async Task<Result<Guid>> Handle(Command request, CancellationToken cancellationToken)
         {
+            
             var position = mapper.Map<Position>(request.PositionDto);
-
+            position.Category = "IT";
             context.Positions.Add(position);
 
             return await context.SaveChangesAsync(cancellationToken) > 0
                 ? Result<Guid>.Success(position.Id)
-                : Result<Guid>.Failure("Failed to delete position", 400);
+                : Result<Guid>.Failure("Failed to create position", 400);
         }
     }
 }
