@@ -1,14 +1,14 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { FormEvent } from "react";
 import { usePositions } from "../../../lib/hooks/usePositions";
+import { Position } from "../../../lib/types";
 
-type Props = {
-    closeForm: () => void;
-    position?: Position;
-}
 
-export default function PositionForm({ closeForm, position }: Props) {
-    const { updatePosition } = usePositions();
+
+export default function PositionForm() {
+
+    const { updatePosition, createPosition } = usePositions();
+    const position = {} as Position;
     const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
@@ -22,7 +22,8 @@ export default function PositionForm({ closeForm, position }: Props) {
         if (position) {
             data.id = position.id;
             await updatePosition.mutateAsync(data as unknown as Position)
-            closeForm();
+        } else {
+            await createPosition.mutateAsync(data as unknown as Position);
         }
 
     }
@@ -36,12 +37,12 @@ export default function PositionForm({ closeForm, position }: Props) {
                 <TextField label='Date' defaultValue={position?.date} type='date' />
                 <TextField label='City' defaultValue={position?.city} />
                 <Box display='flex' justifyContent='end' gap={3}>
-                    <Button onClick={closeForm} color="inherit">Cancel</Button>
+                    <Button color="inherit">Cancel</Button>
                     <Button
                         type="submit"
                         color="success"
                         variant="contained"
-                        disabled={updatePosition.isPending}
+                        disabled={updatePosition.isPending || createPosition.isPending}
                     >Submit</Button>
                 </Box>
             </Box>

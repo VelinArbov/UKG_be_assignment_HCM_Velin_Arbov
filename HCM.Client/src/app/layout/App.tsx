@@ -1,7 +1,7 @@
 import './style.css'
 import { Box, Container, CssBaseline } from '@mui/material';
 import NavBar from './NavBar';
-import PositionsDashboard from '../../features/positions/dashboard/PositionsDashboard';
+import { Outlet } from 'react-router';
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         <CssBaseline />
         <NavBar />
         <Container maxWidth='xl' sx={{ mt: 3 }}>
-            <PositionsDashboard/>
+            <Outlet/>
         </Container>
       </Box>
     </>
