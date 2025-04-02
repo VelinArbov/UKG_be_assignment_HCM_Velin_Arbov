@@ -4,6 +4,7 @@ using HCM.Application.Positions.DTOs;
 using HCM.Application.Positions.Queries;
 using MediatR;
 using HCM.Api.Common.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HCM.Api.Endpoint
 {
@@ -12,10 +13,14 @@ namespace HCM.Api.Endpoint
         public static void MapPositionEndpoints(this WebApplication app)
         {
             app.MapGet("/api/positions", GetAllPositions);
-            app.MapGet("/api/positions/{id}", GetPositionById);
-            app.MapPost("/api/positions", CreatePosition);
-            app.MapPut("/api/positions/{id}", UpdatePosition);
-            app.MapDelete("/api/positions/{id}", DeletePosition);
+
+            var group = app.MapGroup("/api/positions")
+                  .RequireAuthorization();
+
+            group.MapGet("/{id}", GetPositionById);
+            group.MapPost("/", CreatePosition);
+            group.MapPut("/{id}", UpdatePosition);
+            group.MapDelete("/{id}", DeletePosition);
         }
 
         private static async Task<IResult> GetAllPositions(IMediator mediator)

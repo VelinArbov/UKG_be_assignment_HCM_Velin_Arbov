@@ -1,13 +1,26 @@
 ﻿using HCM.Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace HCM.Persistence.Seed;
 
 public static class DbInitializer
 {
-    public static void Initialize(AppDbContext context)
+    public static async Task Initialize(AppDbContext context, UserManager<User> userManager, RoleManager<Role> roleManager)
     {
         // Ensure the database is created
         context.Database.EnsureCreated();
+
+        // Check if there are any roles already in the database
+        if (!roleManager.Roles.Any())
+        {
+            await SeedRoleAsync(roleManager);
+        }
+
+        // Check if there are any users already in the database
+        if (!userManager.Users.Any())
+        {
+            await SeedUsersAsync(userManager); 
+        }
 
         // Check if there are any positions already in the database
         if (context.Positions.Any())
@@ -74,5 +87,51 @@ public static class DbInitializer
             context.Positions.Add(position);
         }
         context.SaveChanges();
+    }
+
+    private static async Task SeedRoleAsync(RoleManager<Role> roleManager)
+    {
+        var roles = new[]
+        {
+        new Role { Name = "Admin", Description = "System Administrator" },
+        new Role { Name = "HR", Description = "Human Resources" },
+        new Role { Name = "Employee", Description = "General Employee" }
+    };
+
+        foreach (var role in roles)
+        {
+            var exists = await roleManager.RoleExistsAsync(role.Name!);
+            if (!exists)
+            {
+                var result = await roleManager.CreateAsync(role);
+                if (!result.Succeeded)
+                {
+                    throw new Exception(string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
+                }
+            }
+        }
+    }
+
+    private static async Task SeedUsersAsync(UserManager<User> userManager)
+    {
+        if (!userManager.Users.Any())
+        {
+            var users = new List<User>
+        {
+            new User { DisplayName = "Bob", UserName = "employee@test.com", Email = "employee@test.com" },
+            new User { DisplayName = "John", UserName = "hr@test.com", Email = "hr@test.com" },
+            new User { DisplayName = "Tom", UserName = "admin@test.com", Email = "admin@test.com" },
+        };
+
+            foreach (var user in users)
+            {
+                var result = await userManager.CreateAsync(user, "Pa$$w0rd");
+                if (!result.Succeeded)
+                {
+                    throw new Exception($"Failed to create user {user.Email}: " +
+                        string.Join(Environment.NewLine, result.Errors.Select(e => e.Description)));
+                }
+            }
+        }
     }
 }
