@@ -1,10 +1,8 @@
-﻿using HCM.Domain;
-using HCM.Application.Positions.Commands;
+﻿using HCM.Application.Positions.Commands;
 using HCM.Application.Positions.DTOs;
 using HCM.Application.Positions.Queries;
 using MediatR;
 using HCM.Api.Common.Extensions;
-using Microsoft.AspNetCore.Authorization;
 
 namespace HCM.Api.Endpoint
 {

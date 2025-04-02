@@ -59,6 +59,7 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapGroup("api").MapIdentityApi<User>(); // Instead creating a login endpoints
 app.MapPositionEndpoints();
+app.MapAccountEndpoints();
 
 // Seed the database
 using (var scope = app.Services.CreateScope())
