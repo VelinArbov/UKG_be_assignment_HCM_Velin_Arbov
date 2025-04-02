@@ -18,12 +18,17 @@ export default function NavBar() {
                             </MenuItem>
                         </Box>
                         <Box sx={{ display: 'flex' }}>
-                            <MenuItemLink  to='/positions' >
+                            <MenuItemLink to='/positions'>
                                 Positions
                             </MenuItemLink>
                             <MenuItemLink
-                                to='/createPosition'                >
+                                to='/createPosition'>
                                 Create Position
+                            </MenuItemLink>
+
+                            <MenuItemLink
+                                to='/counter'>
+                                Counter
                             </MenuItemLink>
                         </Box>
                         <MenuItem> User menu </MenuItem>

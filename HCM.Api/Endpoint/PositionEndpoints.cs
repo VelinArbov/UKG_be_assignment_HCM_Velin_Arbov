@@ -3,6 +3,7 @@ using HCM.Application.Positions.DTOs;
 using HCM.Application.Positions.Queries;
 using MediatR;
 using HCM.Api.Common.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HCM.Api.Endpoint
 {
@@ -27,6 +28,7 @@ namespace HCM.Api.Endpoint
             return Results.Ok(positions);
         }
 
+        [AllowAnonymous]
         private static async Task<IResult> GetPositionById(Guid id, IMediator mediator)
         {
             var result = await mediator.Send(new GetPositionDetails.Query { Id = id });
