@@ -6,6 +6,8 @@ import { useEffect } from "react";
 import { positionSchema, PositionSchema } from "../../../lib/schemas/positionSchema";
 import { zodResolver } from '@hookform/resolvers/zod'
 import TextInput from "../../../app/shared/components/TextInput";
+import SelectInput from "../../../app/shared/components/SelectInput";
+
 
 
 export default function PositionForm() {
@@ -34,7 +36,7 @@ export default function PositionForm() {
                 <TextInput label='Title' control={control} name='title' />
                 <TextInput label='Description' control={control} name='description'
                     multiline rows={3} />
-                <TextField {...register('category')} label='Date' defaultValue={new Date().toISOString().split('T')[0]} type='date' />
+                <SelectInput items={categoryOptions} label='Category' name='category' />
                 <TextField {...register('city')} label='City' defaultValue={position?.city} />
                 <Box display='flex' justifyContent='end' gap={3}>
                     <Button color="inherit">Cancel</Button>
