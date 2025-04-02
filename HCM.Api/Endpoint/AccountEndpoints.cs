@@ -1,11 +1,8 @@
-﻿using HCM.Application.Positions.Commands;
-using HCM.Application.Positions.DTOs;
-using HCM.Application.Positions.Queries;
-using MediatR;
-using HCM.Api.Common.Extensions;
-using HCM.Api.DTOs;
+﻿using HCM.Api.DTOs;
 using Microsoft.AspNetCore.Identity;
 using HCM.Domain;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace HCM.Api.Endpoint
 {
@@ -14,9 +11,9 @@ namespace HCM.Api.Endpoint
         public static void MapAccountEndpoints(this WebApplication app)
         {
             app.MapPost("api/account/register", RegisterUser);
+            app.MapGet("api/account/user", GetUserDetails);
+            app.MapPost("api/account/logout", Logout);
         }
-
-
 
         private static async Task<IResult> RegisterUser(RegisterDto registerDto, SignInManager<User> signInManager)
         {
@@ -49,6 +46,33 @@ namespace HCM.Api.Endpoint
                 user.Email
             });
 
+        }
+
+        [AllowAnonymous]
+        private static async Task<IResult> GetUserDetails(SignInManager<User> signInManager, ClaimsPrincipal claims)
+        {
+            if (!claims.Identity?.IsAuthenticated ?? true)
+            {
+                return Results.Unauthorized();
+            }
+
+            var user = await signInManager.UserManager.GetUserAsync(claims);
+
+            return Results.Ok(new 
+            {
+                user.DisplayName,
+                user.Email,
+                user.Id,
+                user.ImageUrl
+            });
+        }
+
+        [Authorize]
+        private static async Task<IResult> Logout(SignInManager<User> signInManager)
+        {
+            await signInManager.SignOutAsync();
+
+            return Results.NoContent();
         }
     }
 }
