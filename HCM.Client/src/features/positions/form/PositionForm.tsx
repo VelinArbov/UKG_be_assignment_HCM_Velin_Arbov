@@ -5,11 +5,12 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { useEffect } from "react";
 import { positionSchema, PositionSchema } from "../../../lib/schemas/positionSchema";
 import { zodResolver } from '@hookform/resolvers/zod'
+import TextInput from "../../../app/shared/components/TextInput";
 
 
 export default function PositionForm() {
 
-    const { register, reset, handleSubmit } = useForm<PositionSchema>({
+    const { register, reset, control, handleSubmit } = useForm<PositionSchema>({
         mode: 'onTouched',
         resolver: zodResolver(positionSchema)
     });
@@ -30,8 +31,9 @@ export default function PositionForm() {
         <Paper sx={{ borderRadius: 3, padding: 3 }}>
             <Typography variant="h5" gutterBottom color="primary">{position ? 'Edit Position' : 'Create Position'}</Typography>
             <Box component='form' onSubmit={handleSubmit(OnSubmit)} display='flex' flexDirection='column' gap={3}>
-                <TextField {...register('title')} label='Title' defaultValue={position?.title} />
-                <TextField {...register('description')} label='Description' defaultValue={position?.description} multiline rows={3} />
+                <TextInput label='Title' control={control} name='title' />
+                <TextInput label='Description' control={control} name='description'
+                    multiline rows={3} />
                 <TextField {...register('category')} label='Date' defaultValue={new Date().toISOString().split('T')[0]} type='date' />
                 <TextField {...register('city')} label='City' defaultValue={position?.city} />
                 <Box display='flex' justifyContent='end' gap={3}>
