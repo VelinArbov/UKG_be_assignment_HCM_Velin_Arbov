@@ -14,7 +14,7 @@ export default function NavBar() {
                         <Box>
                             <MenuItem component={NavLink} to='/' sx={{ display: 'flex', gap: 2 }}>
                                 <Group fontSize="large" />
-                                <Typography variant="h4" fontWeight='bold'>Human Capital Management</Typography>
+                                <Typography variant="h4" fontWeight='bold'>HCM</Typography>
                             </MenuItem>
                         </Box>
                         <Box sx={{ display: 'flex' }}>
@@ -24,11 +24,6 @@ export default function NavBar() {
                             <MenuItemLink
                                 to='/createPosition'>
                                 Create Position
-                            </MenuItemLink>
-
-                            <MenuItemLink
-                                to='/counter'>
-                                Counter
                             </MenuItemLink>
                         </Box>
                         <MenuItem> User menu </MenuItem>
