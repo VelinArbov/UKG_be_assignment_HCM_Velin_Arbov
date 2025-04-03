@@ -28,23 +28,17 @@ namespace HCM.Api.Endpoint
             return Results.Ok(positions);
         }
 
-        [AllowAnonymous]
         private static async Task<IResult> GetPositionById(Guid id, IMediator mediator)
         {
             var result = await mediator.Send(new GetPositionDetails.Query { Id = id });
             return result.ToApiResult();
         }
 
-
-        [AllowAnonymous]
-
         private static async Task<IResult> CreatePosition(CreatePositionDto position, IMediator mediator)
         {
             var result = await mediator.Send(new CreatePosition.Command { PositionDto = position });
             return result.ToApiResult();
         }
-
-        [AllowAnonymous]
 
         private static async Task<IResult> UpdatePosition(Guid id, UpdatePositionDto updatedPosition, IMediator mediator)
         {
