@@ -1,12 +1,13 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
 import { usePositions } from "../../../lib/hooks/usePositions";
-import { useParams } from "react-router";
-import { FieldValues, useForm } from 'react-hook-form';
+import { useNavigate, useParams } from "react-router";
+import { useForm } from 'react-hook-form';
 import { useEffect } from "react";
 import { positionSchema, PositionSchema } from "../../../lib/schemas/positionSchema";
 import { zodResolver } from '@hookform/resolvers/zod'
 import TextInput from "../../../app/shared/components/TextInput";
 import SelectInput from "../../../app/shared/components/SelectInput";
+import { categoryOptions } from "./categoryOptions";
 
 
 
@@ -16,6 +17,7 @@ export default function PositionForm() {
         mode: 'onTouched',
         resolver: zodResolver(positionSchema)
     });
+    const navigate = useNavigate();
     const { id } = useParams();
     const { updatePosition, createPosition, position, isLoadingPosition } = usePositions(id);
     useEffect(() => {
@@ -23,8 +25,18 @@ export default function PositionForm() {
     }, [position, reset])
 
 
-    const OnSubmit = (data: FieldValues) => {
-        console.log(data);
+    const OnSubmit = (data: PositionSchema) => {
+
+        if (position) {
+            updatePosition.mutate({ ...position, ...data }, {
+                onSuccess: () => navigate(`/positions/${position.id}`)
+            })
+        }
+        else {
+            createPosition.mutate(data, {
+                onSuccess: (x) => navigate(`/positions/${x}`)
+            })
+        }
     }
 
     if (isLoadingPosition) return <Typography>Loading position...</Typography>
@@ -36,10 +48,10 @@ export default function PositionForm() {
                 <TextInput label='Title' control={control} name='title' />
                 <TextInput label='Description' control={control} name='description'
                     multiline rows={3} />
-                <SelectInput items={categoryOptions} label='Category' name='category' />
+                <SelectInput items={categoryOptions} label='Category' name='category' control={control} />
                 <TextField {...register('city')} label='City' defaultValue={position?.city} />
                 <Box display='flex' justifyContent='end' gap={3}>
-                    <Button color="inherit">Cancel</Button>
+                    <Button onClick={() => navigate(`/positions/${position ? id : ''}`)} color="inherit">Cancel</Button>
                     <Button
                         type="submit"
                         color="success"

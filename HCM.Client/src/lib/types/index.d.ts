@@ -1,13 +1,12 @@
 type Position = {
-  id: string;
+  id?: string;
   title: string;
-  date: string; 
+  date: Date;
   description: string;
   category: string;
-  isCancelled: boolean;
+  isCancelled?: boolean;
   city: string;
 };
-
 
 export interface Result<T> {
   isSuccess: boolean;

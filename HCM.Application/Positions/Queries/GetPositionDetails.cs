@@ -19,7 +19,7 @@ public class GetPositionDetails
             var position = await context.Positions.FindAsync([request.Id], cancellationToken);
 
             return position == null 
-                ? Result<Position>.Failure("Activity not found",404) 
+                ? Result<Position>.Failure("Position not found",404) 
                 : Result<Position>.Success(position);
         }
     }

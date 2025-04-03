@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HCM.Api\HCM.Api.csproj" />
+    <ProjectReference Include="..\HCM.Application\HCM.Application.csproj" />
+    <ProjectReference Include="..\HCM.Domain\HCM.Domain.csproj" />
+    <ProjectReference Include="..\HCM.Persistence\HCM.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

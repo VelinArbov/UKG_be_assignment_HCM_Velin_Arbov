@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCM.Domain", "..\HCM.Domain
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCM.Persistence", "..\HCM.Persistence\HCM.Persistence.csproj", "{6743CF32-8851-4839-BD80-0D36717092C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCM.Test", "..\HCM.Test\HCM.Test.csproj", "{0B3AFA32-2C76-46B7-8686-7FEADA549050}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{6743CF32-8851-4839-BD80-0D36717092C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6743CF32-8851-4839-BD80-0D36717092C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6743CF32-8851-4839-BD80-0D36717092C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B3AFA32-2C76-46B7-8686-7FEADA549050}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B3AFA32-2C76-46B7-8686-7FEADA549050}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B3AFA32-2C76-46B7-8686-7FEADA549050}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B3AFA32-2C76-46B7-8686-7FEADA549050}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
