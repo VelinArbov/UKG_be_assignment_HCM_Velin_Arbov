@@ -26,7 +26,7 @@ export default function NavBar() {
                                 Create Position
                             </MenuItemLink>
                         </Box>
-                        <MenuItem> User menu </MenuItem>
+                        {/* <MenuItem> User menu </MenuItem> */}
                     </Toolbar>
                 </Container>
             </AppBar>
