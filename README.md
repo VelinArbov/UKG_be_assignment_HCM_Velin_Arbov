@@ -28,8 +28,6 @@ Frontend:
 
 React 19​
 
-MobX​
-
 TypeScript​
 
 React Router​
@@ -52,23 +50,3 @@ FluentValidation​
 Database:
 
 SQL Server​
-
-Other Tools:
-
-Docker (for containerization)​
-
-Swagger (for API documentation)​
-
-Serilog (for logging)​
-
-🚀 Getting Started
-To set up the HCM system locally, follow these steps:
-
-Prerequisites
-.NET 9 SDK​
-
-Node.js (for frontend development)​
-
-SQL Server​
-
-Docker (optional, for containerization)
